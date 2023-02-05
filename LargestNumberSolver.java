@@ -8,9 +8,9 @@ public class LargestNumberSolver
 {
     /**
      * This generic method sorts the input array using an insertion sort and the input Comparator object.
-     * @param arr
-     * @param cmp
-     * @param <T>
+     * @param arr Array to be sorted
+     * @param cmp Comparator to be used
+     * @param <T> Type of array
      */
     public static <T> void insertionSort(T[] arr, Comparator<? super T> cmp)
     {
@@ -45,7 +45,6 @@ public class LargestNumberSolver
     {
         return 0;
     }
-
 
     /**
      * This method behaves the same as the previous method, but for data type long instead of data type int.
