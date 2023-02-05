@@ -113,7 +113,7 @@ public class LargestNumberSolver
 
     /**
      * This method returns the largest int value that can be formed by arranging the integers
-     * of the given array, in any order.  An OutOfRangeException Download OutOfRangeException is
+     * of the given array, in any order.  An OutOfRangeException is
      * thrown if the largest number that can be formed is too large for the int data type.  Logic
      * for solving the problem of determining the largest number should not appear again in this
      * method — call an existing public method or a helper method.  This method must not alter
@@ -124,7 +124,10 @@ public class LargestNumberSolver
      */
     public static int findLargestInt(Integer[] arr) throws OutOfRangeException
     {
-        return 0;
+        BigInteger largestInteger= findLargestNumber(arr);
+        if(largestInteger.bitLength()>32)
+            throw new OutOfRangeException("Int");
+        return largestInteger.intValue();
     }
 
     /**
@@ -135,7 +138,10 @@ public class LargestNumberSolver
      */
     public static long findLargestLong(Integer[] arr) throws OutOfRangeException
     {
-        return 0;
+        BigInteger largestInteger= findLargestNumber(arr);
+        if(largestInteger.bitLength()>64)
+            throw new OutOfRangeException("long");
+        return largestInteger.longValue();
     }
 
     /**
@@ -146,7 +152,21 @@ public class LargestNumberSolver
      */
     public static BigInteger sum(List<Integer[]> list)
     {
-        return null;
+        BigInteger sum = new BigInteger("0");
+        BigInteger[] largestNumbers = findLargestNumber(list);
+        for(BigInteger i: largestNumbers)
+            sum=sum.add(i);
+        return sum;
+    }
+
+    private static BigInteger[] findLargestNumber(List<Integer[]> list)
+    {
+        BigInteger[] largestNumber = new BigInteger[list.size()];
+        for(int i=0; i<list.size();i++)
+        {
+            largestNumber[i]=findLargestNumber(list.get(i));
+        }
+        return largestNumber;
     }
 
     /**
@@ -163,7 +183,24 @@ public class LargestNumberSolver
      */
     public static Integer[] findKthLargest(List<Integer[]> list, int k) throws IllegalArgumentException
     {
-        return null;
+        LargestNumber[] ln = new LargestNumber[list.size()];
+        for(int i = 0; i<list.size(); i++)
+        {
+            ln[i] = new LargestNumber(findLargestNumber(list.get(i)),list.get(i));
+        }
+        insertionSort(ln, (l1, l2) -> -l1.largestNumber.compareTo(l2.largestNumber));
+        return ln[k].numbers;
+    }
+
+    private static class LargestNumber
+    {
+        BigInteger largestNumber;
+        Integer[] numbers;
+        public LargestNumber(BigInteger largestNumber, Integer[] number)
+        {
+            this.largestNumber = largestNumber;
+            this.numbers = number;
+        }
     }
 
     /**

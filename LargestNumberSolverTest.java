@@ -72,8 +72,8 @@ class LargestNumberSolverTest
         Integer[] tempArray2 = {7, 42, 97};
         tempList.add(tempArray1);
         tempList.add(tempArray2);
-        assertEquals(tempArray2, LargestNumberSolver.findKthLargest(tempList, 0));
-        assertEquals(tempArray1, LargestNumberSolver.findKthLargest(tempList, 1));
+        assertArrayEquals(tempArray2, LargestNumberSolver.findKthLargest(tempList, 0));
+        assertArrayEquals(tempArray1, LargestNumberSolver.findKthLargest(tempList, 1));
     }
 
 
