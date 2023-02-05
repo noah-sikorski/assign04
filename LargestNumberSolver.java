@@ -1,8 +1,11 @@
 package assign04;
 
+import java.io.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class LargestNumberSolver
 {
@@ -183,6 +186,9 @@ public class LargestNumberSolver
      */
     public static Integer[] findKthLargest(List<Integer[]> list, int k) throws IllegalArgumentException
     {
+        if (k < 0 || k > list.size())
+            throw new IllegalArgumentException("k is out of bounds");
+
         LargestNumber[] ln = new LargestNumber[list.size()];
         for(int i = 0; i<list.size(); i++)
         {
@@ -211,6 +217,23 @@ public class LargestNumberSolver
      */
     public static List<Integer[]> readFile(String filename)
     {
-        return null;
+        List<Integer[]> numbers = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            while (null != line) {
+                // parse it
+                String[] strs = line.split("\\s");
+                Integer[] ints = new Integer[strs.length];
+                for (int i = 0; i < ints.length; i++) {
+                    ints[i] = Integer.parseInt(strs[i]);
+                }
+                numbers.add(ints);
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
+        return numbers;
     }
 }
