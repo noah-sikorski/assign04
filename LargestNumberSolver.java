@@ -14,7 +14,19 @@ public class LargestNumberSolver
      */
     public static <T> void insertionSort(T[] arr, Comparator<? super T> cmp)
     {
-
+        for (int i = 0; i < arr.length; i++)
+        {
+            for (int j = i; j > 0; j--)
+            {
+                int compare = cmp.compare(arr[j], arr[j - 1]);
+                if (compare >= 0)
+                    break;
+                // start swapping things
+                T tmp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = tmp;
+            }
+        }
     }
 
     /**
@@ -27,7 +39,76 @@ public class LargestNumberSolver
      */
     public static BigInteger findLargestNumber(Integer[] arr)
     {
-        return null;
+        Integer[] tmp = arr.clone();
+        insertionSort(tmp, (i1, i2) -> {
+            String firstCase = i1.toString() + i2.toString(),
+                    secondCase = i2.toString() + i1.toString();
+
+            return secondCase.compareTo(firstCase);
+
+//            int d1 = numDigits(i1), d2 = numDigits(i2);
+//            int minDigits = (d1 < d2) ? d1 : d2;
+//            int i;
+//            for (i = 0; i < minDigits; i++) {
+//                int compare = digit(i2, i) - digit(i1, i);
+//                if (0 != compare)
+//                    return compare;
+//            }
+//
+//            if (d1 == d2) return 0;
+//
+////            int longerNum = (d1 > d2) ? i1 : i2;
+////            int compare = digit(longerNum, i) - digit(longerNum, 0);
+//            if (d1 > d2) {
+//                // if i1's next digit is <= its first:
+//                // i2 is bigger
+//                // otherwise
+//                // i1 is bigger
+//                int compare = digit(i1, i) - digit(i1, 0);
+//                if (0 == compare)
+//                    return 1;
+//                return -compare;
+//            } else {
+//                // if i2's
+//                int compare = digit(i1, i) - digit(i1, 0);
+//                if (0 == compare)
+//                    return 1;
+//                return -compare;
+//            }
+
+
+        });
+
+        StringBuilder sb = new StringBuilder();
+        for (var item :
+                tmp) {
+            sb.append(item);
+        }
+
+        return new BigInteger(sb.toString());
+    }
+
+    public static int digit(final int of, int i)
+    {
+        if (0 == of) return 0;
+
+        int j = numDigits(of), tmp = of;
+
+        int index = j - 1 - i;
+        if (index <= 0) return of % 10;
+        for (int k = 0; k < index; k++) {
+            tmp /= 10;
+        }
+        return tmp % 10;
+    }
+
+    private static int numDigits(int in) {
+        int digits = 0;
+        while (in > 0) {
+            in /= 10;
+            digits++;
+        }
+        return digits;
     }
 
     /**

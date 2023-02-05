@@ -6,11 +6,30 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LargestNumberSolverTest
 {
+    @Test
+    public void insertionSort()
+    {
+        Integer[] actual = {54, 12, 346, 5, 87, 96, 5};
+        Integer[] expected = {5, 5, 12, 54, 87, 96, 346};
+        LargestNumberSolver.insertionSort(actual, Integer::compare);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void digit() {
+        assertEquals(1, LargestNumberSolver.digit(130, 0));
+        assertEquals(3, LargestNumberSolver.digit(130, 1));
+        assertEquals(0, LargestNumberSolver.digit(130, 2));
+        assertEquals(1, LargestNumberSolver.digit(131, 87687));
+        assertEquals(8, LargestNumberSolver.digit(87691, 0));
+        assertEquals(9, LargestNumberSolver.digit(87691, 3));
+    }
+
     @Test
     public void findLargestNumberTest()
     {
