@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 public class LargestNumberSolver
 {
@@ -37,49 +36,17 @@ public class LargestNumberSolver
      * of the given array, in any order.   If the array is empty, the largest number that
      * can be formed is 0.  This method must not alter the given array and must call your
      * insertionSort method with a Comparator or lambda expression that you design.
-     * @param arr
-     * @return
+     * @param arr array to sort, arr is not altered by the method
+     * @return a BigInteger representing the largest
      */
     public static BigInteger findLargestNumber(Integer[] arr)
     {
         Integer[] tmp = arr.clone();
         insertionSort(tmp, (i1, i2) -> {
             String firstCase = i1.toString() + i2.toString(),
-                    secondCase = i2.toString() + i1.toString();
+                    secondCase = i2 + i1.toString();
 
             return secondCase.compareTo(firstCase);
-
-//            int d1 = numDigits(i1), d2 = numDigits(i2);
-//            int minDigits = (d1 < d2) ? d1 : d2;
-//            int i;
-//            for (i = 0; i < minDigits; i++) {
-//                int compare = digit(i2, i) - digit(i1, i);
-//                if (0 != compare)
-//                    return compare;
-//            }
-//
-//            if (d1 == d2) return 0;
-//
-////            int longerNum = (d1 > d2) ? i1 : i2;
-////            int compare = digit(longerNum, i) - digit(longerNum, 0);
-//            if (d1 > d2) {
-//                // if i1's next digit is <= its first:
-//                // i2 is bigger
-//                // otherwise
-//                // i1 is bigger
-//                int compare = digit(i1, i) - digit(i1, 0);
-//                if (0 == compare)
-//                    return 1;
-//                return -compare;
-//            } else {
-//                // if i2's
-//                int compare = digit(i1, i) - digit(i1, 0);
-//                if (0 == compare)
-//                    return 1;
-//                return -compare;
-//            }
-
-
         });
 
         StringBuilder sb = new StringBuilder();
@@ -89,29 +56,6 @@ public class LargestNumberSolver
         }
 
         return new BigInteger(sb.toString());
-    }
-
-    public static int digit(final int of, int i)
-    {
-        if (0 == of) return 0;
-
-        int j = numDigits(of), tmp = of;
-
-        int index = j - 1 - i;
-        if (index <= 0) return of % 10;
-        for (int k = 0; k < index; k++) {
-            tmp /= 10;
-        }
-        return tmp % 10;
-    }
-
-    private static int numDigits(int in) {
-        int digits = 0;
-        while (in > 0) {
-            in /= 10;
-            digits++;
-        }
-        return digits;
     }
 
     /**
@@ -182,11 +126,11 @@ public class LargestNumberSolver
      * @param list
      * @param k
      * @return
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if k refers to an index outside of list
      */
     public static Integer[] findKthLargest(List<Integer[]> list, int k) throws IllegalArgumentException
     {
-        if (k < 0 || k > list.size())
+        if (k < 0 || k >= list.size())
             throw new IllegalArgumentException("k is out of bounds");
 
         LargestNumber[] ln = new LargestNumber[list.size()];
