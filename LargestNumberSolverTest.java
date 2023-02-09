@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +30,16 @@ class LargestNumberSolverTest
         LargestNumberSolver.insertionSort(intArrMedium, Integer::compare);
 
         assertArrayEquals(expected, intArrMedium);
+    }
+
+    @Test
+    public void insertionSortLarge()
+    {
+        Integer[] expected = intArrLarge.clone();
+        Arrays.sort(expected);
+        LargestNumberSolver.insertionSort(intArrLarge, Integer::compare);
+
+        assertArrayEquals(expected, intArrLarge);
     }
 
     @Test
