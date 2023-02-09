@@ -16,18 +16,23 @@ public class LargestNumberSolver
      */
     public static <T> void insertionSort(T[] arr, Comparator<? super T> cmp)
     {
-        for (int i = 0; i < arr.length; i++)
+        for (int i = 1; i < arr.length; i++)
         {
-            for (int j = i; j > 0; j--)
+            T tmp = arr[i];
+            int j;
+            for (j = i; j > 0; j--)
             {
-                int compare = cmp.compare(arr[j], arr[j - 1]);
+                int compare = cmp.compare(tmp, arr[j - 1]);
                 if (compare >= 0)
                     break;
-                // start swapping things
-                T tmp = arr[j];
+                // copy items up in the array until we find a spot for tmp
                 arr[j] = arr[j - 1];
-                arr[j - 1] = tmp;
+//                T tmp = arr[j];
+//                arr[j] = arr[j - 1];
+//                arr[j - 1] = tmp;
             }
+            // swap tmp into place
+            arr[j] = tmp;
         }
     }
 
@@ -102,7 +107,7 @@ public class LargestNumberSolver
         BigInteger sum = new BigInteger("0");
         BigInteger[] largestNumbers = findLargestNumber(list);
         for(BigInteger i: largestNumbers)
-            sum=sum.add(i);
+            sum = sum.add(i);
         return sum;
     }
 
