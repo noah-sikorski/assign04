@@ -38,7 +38,9 @@ public class findKthLargestTimer {
             // Now, run the test
             startTime = System.nanoTime();
             for (int i = 0; i < timesToLoop; i++) {
-                LargestNumberSolver.findKthLargest(test, rng.nextInt(test.size()));
+                // since indexing into an arraylist is a constant time operation,
+                // it shouldn't matter what we put for k here, so use 0 for convenience
+                LargestNumberSolver.findKthLargest(test, 0);
             }
             midpointTime = System.nanoTime();
             // Run a loop to capture the cost of running the "timesToLoop" loop
