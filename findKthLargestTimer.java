@@ -13,7 +13,7 @@ public class findKthLargestTimer {
 
         final int nStep = 2_500;
 
-        int timesToLoop = 1_000;
+        int timesToLoop = 200;
 
         // For each problem size n . . .
         for (int n = 2_500; n <= 25_000; n += nStep) {
