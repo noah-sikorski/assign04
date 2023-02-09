@@ -11,12 +11,12 @@ public class findKthLargestTimer {
 
         boolean first = true;
 
-        final int nStep = 2_500;
+        final int nStep = 1_000;
 
-        int timesToLoop = 200;
+        int timesToLoop = 1_000;
 
         // For each problem size n . . .
-        for (int n = 2_500; n <= 25_000; n += nStep) {
+        for (int n = 1_000; n <= 10_000; n += nStep) {
             // create a list of n Integer[] of length 5
             List<Integer[]> test = new ArrayList<>();
             for (int j = 0; j < n; j++) {
