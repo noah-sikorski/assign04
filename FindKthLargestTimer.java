@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class findKthLargestTimer {
+public class FindKthLargestTimer {
 
     public static void main(String[] args) {
         Random rng = new Random();
