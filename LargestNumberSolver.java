@@ -6,6 +6,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Class that provide methods for finding and working with the largest number
+ * that can be formed from an array of Integers, if every number in the array
+ * were concatenated together to form one larger number.
+ *
+ * @author Jayden Ferrin and Noah Sikorski
+ * @version February 4, 2023
+ */
+
 public class LargestNumberSolver
 {
     /**
@@ -41,7 +50,7 @@ public class LargestNumberSolver
      * of the given array, in any order.   If the array is empty, the largest number that
      * can be formed is 0.  This method must not alter the given array and must call your
      * insertionSort method with a Comparator or lambda expression that you design.
-     * @param arr array to sort, arr is not altered by the method
+     * @param arr array to find the largest number, arr is not altered by the method
      * @return a BigInteger representing the largest
      */
     public static BigInteger findLargestNumber(Integer[] arr)
@@ -70,8 +79,8 @@ public class LargestNumberSolver
      * for solving the problem of determining the largest number should not appear again in this
      * method — call an existing public method or a helper method.  This method must not alter
      * the given array.
-     * @param arr
-     * @return
+     * @param arr array to find the largest number, arr is not altered by the method
+     * @return int representation of the largest number, if it can fit into an int type
      * @throws OutOfRangeException
      */
     public static int findLargestInt(Integer[] arr) throws OutOfRangeException
@@ -84,8 +93,8 @@ public class LargestNumberSolver
 
     /**
      * This method behaves the same as the previous method, but for data type long instead of data type int.
-     * @param arr
-     * @return
+     * @param arr array to find the largest number, arr is not altered by the method
+     * @return long representation of the largest number, if it can fit into a long type
      * @throws OutOfRangeException
      */
     public static long findLargestLong(Integer[] arr) throws OutOfRangeException
@@ -99,8 +108,8 @@ public class LargestNumberSolver
     /**
      * This method sums the largest numbers that can be formed by each array in the given list.
      * This method must not alter the given list.
-     * @param list
-     * @return
+     * @param list List of Integers to find the largest number of each of them
+     * @return The sum of the largest numbers that can be formed with the arrays in the list
      */
     public static BigInteger sum(List<Integer[]> list)
     {
@@ -111,6 +120,12 @@ public class LargestNumberSolver
         return sum;
     }
 
+    /**
+     * Helper method to find the largest number of multiple arrays
+     * @param list List of Integers to find the largest number of each of them
+     * @return Array of BigIntegers representing the largest numbers of the arrays
+     * in the input, in the order that they were given
+     */
     private static BigInteger[] findLargestNumber(List<Integer[]> list)
     {
         BigInteger[] largestNumber = new BigInteger[list.size()];
@@ -128,9 +143,9 @@ public class LargestNumberSolver
      * number itself.  An IllegalArgumentException Links to an external site.is thrown if k is not a valid
      * position in the list.  This method must not alter the given list and must call your insertionSort
      * method with a Comparator or lambda expression that you design.
-     * @param list
-     * @param k
-     * @return
+     * @param list List of Integers to find the largest number of each of them
+     * @param k How many levels under the largest largest number of list.
+     * @return The kth largest number that can be formed from one of the Integer arrays from list
      * @throws IllegalArgumentException if k refers to an index outside of list
      */
     public static Integer[] findKthLargest(List<Integer[]> list, int k) throws IllegalArgumentException
@@ -147,6 +162,10 @@ public class LargestNumberSolver
         return ln[k].numbers;
     }
 
+    /**
+     * Convenience class to be able to provide a custom sorting to Integer arrays
+     * based on their largest number as a BigInteger
+     */
     private static class LargestNumber
     {
         BigInteger largestNumber;
@@ -161,8 +180,8 @@ public class LargestNumberSolver
     /**
      * This method generates list of integer arrays from an input file, such that each line corresponds to
      * one array of integers separated by blank spaces, and returns an empty list if the file does not exist.
-     * @param filename
-     * @return
+     * @param filename Path to a file to be read
+     * @return List of Integer arrays ready to be plugged into another method.
      */
     public static List<Integer[]> readFile(String filename)
     {
